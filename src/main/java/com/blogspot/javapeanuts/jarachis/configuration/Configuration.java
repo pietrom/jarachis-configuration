@@ -27,6 +27,11 @@ public class Configuration {
 	}
 
 	public Double getDouble(String key) {
-		return Double.valueOf(get(key));
+		final String prop = get(key);
+		Double val = null;
+		if(prop != null) {
+			val = Double.valueOf(get(key));
+		}
+		return val;
 	}
 }

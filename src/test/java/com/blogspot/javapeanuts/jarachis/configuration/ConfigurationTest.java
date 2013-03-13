@@ -47,4 +47,10 @@ public class ConfigurationTest {
 		Configuration configuration = new Configuration(new Properties());
 		assertNull(configuration.getInteger(KEY));
 	}
+	
+	@Test
+	public void getPropertyAsDoubleWhenAbsent() throws Exception {
+		Configuration configuration = new Configuration(new Properties());
+		assertNull(configuration.getDouble(KEY));
+	}
 }
