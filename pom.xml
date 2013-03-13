@@ -70,9 +70,9 @@
 				<version>2.4</version>
 				<configuration>
 					<verbose>true</verbose>
-					<compilerVersion>1.6</compilerVersion>
-					<source>1.6</source>
-					<target>1.6</target>
+					<compilerVersion>${maven.compile.source}</compilerVersion>
+					<source>${maven.compile.source}</source>
+					<target>${maven.compile.target}}</target>
 				</configuration>
 			</plugin>
 
