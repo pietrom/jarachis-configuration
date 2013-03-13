@@ -17,7 +17,6 @@ public class Configuration {
 		return get(key);
 	}
 
-
 	public Integer getInteger(String key) {
 		final String prop = get(key);
 		Integer val = null;
@@ -25,5 +24,9 @@ public class Configuration {
 			val = Integer.valueOf(prop);
 		}
 		return val;
+	}
+
+	public Double getDouble(String key) {
+		return Double.valueOf(get(key));
 	}
 }
