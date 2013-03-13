@@ -19,6 +19,11 @@ public class Configuration {
 
 
 	public Integer getInteger(String key) {
-		return Integer.valueOf(get(key));
+		final String prop = get(key);
+		Integer val = null;
+		if(prop != null) {
+			val = Integer.valueOf(prop);
+		}
+		return val;
 	}
 }

@@ -26,4 +26,16 @@ public class ConfigurationTest {
 		Configuration configuration = new Configuration(props);
 		assertEquals(Integer.valueOf(INT_VALUE), configuration.getInteger(KEY));
 	}
+	
+	@Test
+	public void getPropertyAsStringWhenAbsent() throws Exception {
+		Configuration configuration = new Configuration(new Properties());
+		assertNull(configuration.getString(KEY));
+	}
+	
+	@Test
+	public void getPropertyAsIntWhenAbsent() throws Exception {
+		Configuration configuration = new Configuration(new Properties());
+		assertNull(configuration.getInteger(KEY));
+	}
 }
