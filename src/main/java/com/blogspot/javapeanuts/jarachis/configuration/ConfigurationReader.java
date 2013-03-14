@@ -13,7 +13,7 @@ public class ConfigurationReader {
 	private final File root;
 
 	public ConfigurationReader(String prefix) {
-		URL rootUrl = getClass().getClassLoader().getResource(prefix);
+		URL rootUrl = getClass().getResource(prefix);
 		this.root = new File(rootUrl.getFile());
 	}
 

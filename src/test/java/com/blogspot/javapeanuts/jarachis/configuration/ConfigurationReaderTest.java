@@ -7,7 +7,7 @@ import org.junit.Test;
 public class ConfigurationReaderTest {
 	@Test
 	public void readConfigurationByClassLoaderGivenPrefix() throws Exception {
-		ConfigurationReader reader = new ConfigurationReader("simple");
+		ConfigurationReader reader = new ConfigurationReader("/simple");
 		Configuration configuration = reader.readBaseConfiguration();
 		assertEquals(Integer.valueOf(1), configuration.getInteger("a"));
 		assertEquals("2", configuration.getString("b"));
@@ -16,7 +16,7 @@ public class ConfigurationReaderTest {
 	
 	@Test
 	public void readConfigurationByClassLoaderGivenPrefixAndPropertiesFileInBothTraditionalAndXmlFormat() throws Exception {
-		ConfigurationReader reader = new ConfigurationReader("misc");
+		ConfigurationReader reader = new ConfigurationReader("/misc");
 		Configuration configuration = reader.readBaseConfiguration();
 		assertEquals(Integer.valueOf(1), configuration.getInteger("a"));
 		assertEquals("2", configuration.getString("b"));
@@ -25,7 +25,7 @@ public class ConfigurationReaderTest {
 	
 	@Test
 	public void readConfigurationByKey() throws Exception {
-		ConfigurationReader reader = new ConfigurationReader("config");
+		ConfigurationReader reader = new ConfigurationReader("/config");
 		Configuration configuration = reader.readConfiguration("sub01");
 		assertEquals("aa", configuration.getString("b1"));
 		assertEquals(Integer.valueOf(22), configuration.getInteger("s1_1_2"));
