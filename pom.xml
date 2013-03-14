@@ -155,7 +155,7 @@
 								<minimumTokens>100</minimumTokens>
 								<minimumPriority>3</minimumPriority>
 								<!-- Change minimum priority to see more or less messages -->
-								<targetJdk>1.6</targetJdk>
+								<targetJdk>${maven.compile.target}</targetJdk>
 							</configuration>
 						</plugin>
 						<plugin>
