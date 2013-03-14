@@ -1,14 +1,12 @@
 package com.blogspot.javapeanuts.jarachis.configuration;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.net.URL;
-import java.util.Enumeration;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class GetResourcesTest {
 	@Test
