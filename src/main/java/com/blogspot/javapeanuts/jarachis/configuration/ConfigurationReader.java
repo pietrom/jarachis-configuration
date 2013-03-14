@@ -18,21 +18,26 @@ public class ConfigurationReader {
 	}
 
 	public Configuration readBaseConfiguration() throws IOException {
-		Properties result = loadProperties("");
-		return new Configuration(result);
+		Properties base = loadBaseProperties();
+		return new Configuration(base);
+	}
+	
+	private Properties loadBaseProperties() throws IOException {
+		Properties result = new Properties();
+		loadProperties(root, result);
+		return result;
 	}
 
 	private Properties loadProperties(String key) throws IOException, InvalidPropertiesFormatException {
-		Properties result = null;
-		if ("".equals(key)) {
-			result = new Properties();
-		} else {
-			result = new Properties(loadProperties(""));
-		}
+		Properties result = new Properties(loadBaseProperties());
 		File keyedRoot = new File(root, key);
-		loadTraditionalPropertiesFiles(keyedRoot, result);
-		loadXmlPropertiesFiles(keyedRoot, result);
+		loadProperties(keyedRoot, result);
 		return result;
+	}
+	
+	private void loadProperties(File root, Properties properties) throws IOException {
+		loadTraditionalPropertiesFiles(root, properties);
+		loadXmlPropertiesFiles(root, properties);
 	}
 
 	private void loadTraditionalPropertiesFiles(File root, Properties result) throws IOException {
