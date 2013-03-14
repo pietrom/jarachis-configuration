@@ -22,4 +22,12 @@ public class ConfigurationReaderTest {
 		assertEquals("2", configuration.getString("b"));
 		assertEquals(Integer.valueOf(33), configuration.getInteger("z"));
 	}
+	
+	@Test
+	public void readConfigurationByKey() throws Exception {
+		ConfigurationReader reader = new ConfigurationReader("config");
+		Configuration configuration = reader.readConfiguration("sub01");
+		assertEquals("aa", configuration.getString("b1"));
+		assertEquals(Integer.valueOf(22), configuration.getInteger("s1_1_2"));
+	}
 }

@@ -18,10 +18,21 @@ public class ConfigurationReader {
 	}
 
 	public Configuration readBaseConfiguration() throws IOException {
-		Properties result = new Properties();
-		loadTraditionalPropertiesFiles(root, result);
-		loadXmlPropertiesFiles(root, result);
+		Properties result = loadProperties("");
 		return new Configuration(result);
+	}
+
+	private Properties loadProperties(String key) throws IOException, InvalidPropertiesFormatException {
+		Properties result = null;
+		if ("".equals(key)) {
+			result = new Properties();
+		} else {
+			result = new Properties(loadProperties(""));
+		}
+		File keyedRoot = new File(root, key);
+		loadTraditionalPropertiesFiles(keyedRoot, result);
+		loadXmlPropertiesFiles(keyedRoot, result);
+		return result;
 	}
 
 	private void loadTraditionalPropertiesFiles(File root, Properties result) throws IOException {
@@ -48,5 +59,10 @@ public class ConfigurationReader {
 			InputStream input = new FileInputStream(new File(root, xmls[i]));
 			result.loadFromXML(input);
 		}
+	}
+
+	public Configuration readConfiguration(String key) throws InvalidPropertiesFormatException, IOException {
+		Properties config = loadProperties(key);
+		return new Configuration(config);
 	}
 }
