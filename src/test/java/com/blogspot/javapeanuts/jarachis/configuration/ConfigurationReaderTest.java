@@ -30,4 +30,11 @@ public class ConfigurationReaderTest {
 		assertEquals("aa", configuration.getString("b1"));
 		assertEquals(Integer.valueOf(22), configuration.getInteger("s1_1_2"));
 	}
+	
+	@Test
+	public void canOverrideBasePropertiesInKeyedConfiguration() throws Exception {
+		ConfigurationReader reader = new ConfigurationReader("/config");
+		Configuration configuration = reader.readConfiguration("sub01");
+		assertEquals("overriden", configuration.getString("b2"));
+	}
 }
