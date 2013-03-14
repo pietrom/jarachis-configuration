@@ -19,12 +19,12 @@ public class ConfigurationReader {
 		Properties result = new Properties();
 		URL rootUrl = getClass().getClassLoader().getResource(prefix);
 		File root = new File(rootUrl.getFile());
-		loadTraditionalPropertyFiles(root, result);
+		loadTraditionalPropertiesFiles(root, result);
 		loadXmlPropertiesFiles(root, result);
 		return new Configuration(result);
 	}
 
-	private void loadTraditionalPropertyFiles(File root, Properties result) throws IOException {
+	private void loadTraditionalPropertiesFiles(File root, Properties result) throws IOException {
 		String[] props = root.list(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
