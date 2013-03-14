@@ -1,6 +1,7 @@
 package com.blogspot.javapeanuts.jarachis.configuration;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,16 +10,15 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 public class ConfigurationReader {
-	private final String prefix;
+	private final File root;
 
 	public ConfigurationReader(String prefix) {
-		this.prefix = prefix;
+		URL rootUrl = getClass().getClassLoader().getResource(prefix);
+		this.root = new File(rootUrl.getFile());
 	}
 
 	public Configuration readBaseConfiguration() throws IOException {
 		Properties result = new Properties();
-		URL rootUrl = getClass().getClassLoader().getResource(prefix);
-		File root = new File(rootUrl.getFile());
 		loadTraditionalPropertiesFiles(root, result);
 		loadXmlPropertiesFiles(root, result);
 		return new Configuration(result);
@@ -32,7 +32,7 @@ public class ConfigurationReader {
 			}
 		});
 		for (int i = 0; i < props.length; i++) {
-			InputStream input = getClass().getResourceAsStream("/" + prefix + "/" + props[i]);
+			InputStream input = new FileInputStream(new File(root, props[i]));
 			result.load(input);
 		}
 	}
@@ -45,7 +45,7 @@ public class ConfigurationReader {
 			}
 		});
 		for (int i = 0; i < xmls.length; i++) {
-			InputStream input = getClass().getResourceAsStream("/" + prefix + "/" + xmls[i]);
+			InputStream input = new FileInputStream(new File(root, xmls[i]));
 			result.loadFromXML(input);
 		}
 	}
