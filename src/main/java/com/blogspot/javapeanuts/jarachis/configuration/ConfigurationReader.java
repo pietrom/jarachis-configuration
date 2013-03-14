@@ -8,8 +8,12 @@ import java.net.URL;
 import java.util.Properties;
 
 public class ConfigurationReader {
+	private final String prefix;
+	public ConfigurationReader(String prefix) {
+		this.prefix = prefix;
+	}
 
-	public Configuration readConfiguration(String prefix) throws IOException {
+	public Configuration readBaseConfiguration() throws IOException {
 		Properties result = new Properties();
 		URL rootUrl = getClass().getClassLoader().getResource(prefix);
 		File root = new File(rootUrl.getFile());
