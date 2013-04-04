@@ -2,6 +2,7 @@ package com.blogspot.javapeanuts.jarachis.configuration;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.util.Properties;
 
 import org.junit.Test;
@@ -10,6 +11,15 @@ public class ConfigurationReaderTest {
 	@Test
 	public void readConfigurationByClassLoaderGivenPrefix() throws Exception {
 		ConfigurationReader reader = new ConfigurationReader("/simple");
+		Configuration configuration = reader.readBaseConfiguration();
+		assertEquals(Integer.valueOf(1), configuration.getInteger("a"));
+		assertEquals("2", configuration.getString("b"));
+		assertEquals(Integer.valueOf(3), configuration.getInteger("z"));
+	}
+	
+	@Test
+	public void readConfigurationFromFilesystemGivenPrefix() throws Exception {
+		ConfigurationReader reader = new ConfigurationReader(new File("src/test/resources/simple"));
 		Configuration configuration = reader.readBaseConfiguration();
 		assertEquals(Integer.valueOf(1), configuration.getInteger("a"));
 		assertEquals("2", configuration.getString("b"));
@@ -53,6 +63,13 @@ public class ConfigurationReaderTest {
 	@Test
 	public void canOverrideBasePropertiesInKeyedConfiguration() throws Exception {
 		ConfigurationReader reader = new ConfigurationReader("/config");
+		Configuration configuration = reader.readConfiguration("sub01");
+		assertEquals("overriden", configuration.getString("b2"));
+	}
+	
+	@Test
+	public void canOverrideBasePropertiesInKeyedConfigurationReadingFromFileSystem() throws Exception {
+		ConfigurationReader reader = new ConfigurationReader(new File("src/test/resources/config"));
 		Configuration configuration = reader.readConfiguration("sub01");
 		assertEquals("overriden", configuration.getString("b2"));
 	}

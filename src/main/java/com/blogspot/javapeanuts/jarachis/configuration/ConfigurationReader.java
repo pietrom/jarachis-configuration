@@ -17,6 +17,10 @@ public class ConfigurationReader {
 		this.root = new File(rootUrl.getFile());
 	}
 
+	public ConfigurationReader(File baseDir) {
+		this.root = baseDir;
+	}
+
 	public Configuration readBaseConfiguration() throws IOException {
 		Properties base = readBaseProperties();
 		return new Configuration(base);
