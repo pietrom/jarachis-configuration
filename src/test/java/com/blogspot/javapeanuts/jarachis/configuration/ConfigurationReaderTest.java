@@ -61,6 +61,14 @@ public class ConfigurationReaderTest {
 	}
 	
 	@Test
+	public void readPropertiesFromJarByKey() throws Exception {
+		ConfigurationReader reader = new ConfigurationReader("/jar-config");
+		Properties properties = reader.readProperties("sub01");
+		assertEquals("aa", properties.getProperty("b1"));
+		assertEquals("22", properties.getProperty("s1_1_2"));
+	}
+	
+	@Test
 	public void canOverrideBasePropertiesInKeyedConfiguration() throws Exception {
 		ConfigurationReader reader = new ConfigurationReader("/config");
 		Configuration configuration = reader.readConfiguration("sub01");
